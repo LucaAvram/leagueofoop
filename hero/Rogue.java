@@ -72,7 +72,9 @@ public class Rogue extends Hero {
 
         return Math.round(final_damage);
     }
-
+    public void isAttackedBy(Hero hero, char terrain) {
+        hero.attack(this, terrain);
+    }
     @Override
     public void attack(Wizard wizard, char terrain) {
         int damage = 0;
@@ -173,7 +175,14 @@ public class Rogue extends Hero {
 
     @Override
     public int BaseDamageCalculator(char terrain) {
-        return 0;
+        float baseDamage1 = BACKSTAB_BASE + BACKSTAB_PERLVL * this.getLevel();
+        float baseDamage2 = PARALYSIS_INSTANT + PARALYSIS_INSTLVL * this.getLevel();
+        float total_damage = 0;
+        if(terrain == 'W'){
+            total_damage = (baseDamage1 + baseDamage2) * TERRAIN_BONUS;
+        }
+        return Math.round(total_damage);
+
     }
 
 

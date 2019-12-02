@@ -5,7 +5,7 @@ import java.util.List;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import fileio.FileSystem;
-import hero.Hero;
+import hero.*;
 
 public class GameInputLoader {
     // DO NOT MODIFY
@@ -45,7 +45,19 @@ public class GameInputLoader {
             }
             numberOfHeroes = fs.nextInt();
             for(i=0; i<numberOfHeroes; i++){
-                heroes.add(new Hero(fs.nextWord().charAt(0),fs.nextInt(),fs.nextInt()));
+                char type = fs.nextWord().charAt(0);
+                if(type == 'W') {
+                    heroes.add(new Wizard(type, fs.nextInt(), fs.nextInt()));
+                }
+                if(type == 'R'){
+                    heroes.add(new Rogue(type, fs.nextInt(), fs.nextInt()));
+                }
+                if(type == 'K'){
+                    heroes.add(new Knight(type, fs.nextInt(), fs.nextInt()));
+                }
+                if(type == 'P'){
+                    heroes.add(new Pyromancer(type, fs.nextInt(), fs.nextInt()));
+                }
             }
             numberOfRounds = fs.nextInt();
             for(i=0; i<numberOfHeroes; i++){

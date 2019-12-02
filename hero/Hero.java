@@ -119,7 +119,7 @@ public abstract class Hero {
     public void setDead(boolean isDead){
         this.isDead = isDead;
     }
-
+    public abstract void isAttackedBy(Hero hero, char terrain);
     public abstract void attack(Wizard wizard, char terrain);
     public abstract void attack(Pyromancer pyromancer, char terrain);
     public abstract void attack(Knight knight, char terrain);

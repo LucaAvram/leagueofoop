@@ -65,6 +65,11 @@ public class Wizard extends Hero {
 
         return Math.round(damage);
     }
+
+    public void isAttackedBy(Hero hero, char terrain) {
+        hero.attack(this, terrain);
+    }
+
     public void attack(Wizard wizard, char terrain){
         int damage = 0;
         damage = Drain(wizard, terrain);

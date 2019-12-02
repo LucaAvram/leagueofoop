@@ -23,6 +23,11 @@ public class Knight extends Hero {
         super(type, x, y);
     }
 
+    @Override
+    public void isAttackedBy(Hero hero, char terrain) {
+        hero.attack(this, terrain);
+    }
+
     public int Execute(Hero hero, char terrain){
 
         float hp_limit = HP_LIMIT + this.getLevel()*LEVEL_MULTIPIER;
@@ -132,6 +137,7 @@ public class Knight extends Hero {
         }
         return Math.round(baseDamage1 + baseDamage2);
     }
+
 
 
 }

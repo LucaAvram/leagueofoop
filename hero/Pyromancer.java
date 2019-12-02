@@ -66,6 +66,11 @@ public class Pyromancer extends Hero {
 
         return Math.round(final_damage);
     }
+
+    public void isAttackedBy(Hero hero, char terrain) {
+        hero.attack(this, terrain);
+    }
+
     public void attack(Wizard wizard, char terrain){
         int damage = 0;
         damage = FireBlast(wizard, terrain) + Ignite(wizard, terrain);

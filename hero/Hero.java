@@ -3,7 +3,7 @@ package hero;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Hero {
+public abstract class Hero {
     private char type;
     private int x;
     private int y;
@@ -119,4 +119,10 @@ public class Hero {
     public void setDead(boolean isDead){
         this.isDead = isDead;
     }
+
+    public abstract void attack(Wizard wizard, char terrain);
+    public abstract void attack(Pyromancer pyromancer, char terrain);
+    public abstract void attack(Knight knight, char terrain);
+    public abstract void attack(Rogue rogue, char terrain);
+    public abstract int BaseDamageCalculator(char terrain);
 }

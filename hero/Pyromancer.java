@@ -15,14 +15,14 @@ public class Pyromancer extends Hero {
     private static final float IFROGUE_IGN = 0.8f;
     private static final float IFKNIGHT_IGN = 1.2f;
     private static final float IFPYRO_IGN = 0.9f;
-    private static final float LAND_BONUS = 1.25f;
+    private static final float TERRAIN_BONUS = 1.25f;
     private static final int IGNITE_ROUNDS = 2;
 
     public Pyromancer(char type, int x, int y) {
         super(type, x, y);
     }
 
-    public int FireBlast(Hero hero, char land){
+    public int FireBlast(Hero hero, char terrain){
         float starting_damage;
         starting_damage = FIREBLAST_BASEDAMAGE + this.getLevel() * FIREBLAST_DMGPERLVL;
         float final_damage = 0;
@@ -38,13 +38,13 @@ public class Pyromancer extends Hero {
         if(hero.getType() == 'P'){
             final_damage = starting_damage * IFPYRO_FB;
         }
-        if(land == 'V'){
-            final_damage = final_damage * LAND_BONUS;
+        if(terrain == 'V'){
+            final_damage = final_damage * TERRAIN_BONUS;
         }
 
         return Math.round(final_damage);
     }
-    public int Ignite(Hero hero, char land){
+    public int Ignite(Hero hero, char terrain){
         float starting_damage;
         starting_damage = IGNITE_BASEDAMAGE + this.getLevel() * IGNITE_DMGPERLEVEL;
         float final_damage = 0;
@@ -60,15 +60,15 @@ public class Pyromancer extends Hero {
         if(hero.getType() == 'P'){
             final_damage = starting_damage * IFPYRO_IGN;
         }
-        if(land == 'V'){
-            final_damage = final_damage * LAND_BONUS;
+        if(terrain == 'V'){
+            final_damage = final_damage * TERRAIN_BONUS;
         }
 
         return Math.round(final_damage);
     }
-    public void attack(Wizard wizard, char land){
+    public void attack(Wizard wizard, char terrain){
         int damage = 0;
-        damage = FireBlast(wizard, land) + Ignite(wizard, land);
+        damage = FireBlast(wizard, terrain) + Ignite(wizard, terrain);
         if(damage >= wizard.getCurrentHP()){
             wizard.setDead(true);
         }
@@ -81,9 +81,9 @@ public class Pyromancer extends Hero {
         igniteSet[2] = IGNITE_ROUNDS;
         wizard.setIsIgnited(igniteSet);
     }
-    public void attack(Rogue rogue, char land){
+    public void attack(Rogue rogue, char terrain){
         int damage = 0;
-        damage = FireBlast(rogue, land) + Ignite(rogue, land);
+        damage = FireBlast(rogue, terrain) + Ignite(rogue, terrain);
         if(damage >= rogue.getCurrentHP()){
             rogue.setDead(true);
         }
@@ -96,9 +96,9 @@ public class Pyromancer extends Hero {
         igniteSet[2] = IGNITE_ROUNDS;
         rogue.setIsIgnited(igniteSet);
     }
-    public void attack(Knight knight, char land){
+    public void attack(Knight knight, char terrain){
         int damage = 0;
-        damage = FireBlast(knight, land) + Ignite(knight, land);
+        damage = FireBlast(knight, terrain) + Ignite(knight, terrain);
         if(damage >= knight.getCurrentHP()){
             knight.setDead(true);
         }
@@ -111,9 +111,9 @@ public class Pyromancer extends Hero {
         igniteSet[2] = IGNITE_ROUNDS;
         knight.setIsIgnited(igniteSet);
     }
-    public void attack(Pyromancer pyromancer, char land){
+    public void attack(Pyromancer pyromancer, char terrain){
         int damage = 0;
-        damage = FireBlast(pyromancer, land) + Ignite(pyromancer, land);
+        damage = FireBlast(pyromancer, terrain) + Ignite(pyromancer, terrain);
         if(damage >= pyromancer.getCurrentHP()){
             pyromancer.setDead(true);
         }
@@ -126,6 +126,16 @@ public class Pyromancer extends Hero {
         igniteSet[2] = IGNITE_ROUNDS;
         pyromancer.setIsIgnited(igniteSet);
     }
+    public int BaseDamageCalculator(char terrain){
+        float baseDamage1 = FIREBLAST_BASEDAMAGE + FIREBLAST_DMGPERLVL * this.getLevel();
+        float baseDamage2 = IGNITE_BASEDAMAGE + IGNITE_DMGPERLEVEL * this.getLevel();
+        float total_damage = 0;
+        if(terrain == 'V'){
+            total_damage = (baseDamage1 + baseDamage2) * TERRAIN_BONUS;
+        }
+        return Math.round(total_damage);
+    }
+
 
 
 }

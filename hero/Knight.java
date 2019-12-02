@@ -15,7 +15,7 @@ public class Knight extends Hero {
     private static final float IFROGUE_SLAM = 0.8f;
     private static final float IFKNIGHT_SLAM = 1.2f;
     private static final float IFPYRO_SLAM = 0.9f;
-    private static final float LAND_BONUS = 1.15f;
+    private static final float TERRAIN_BONUS = 1.15f;
 
 
 
@@ -23,7 +23,7 @@ public class Knight extends Hero {
         super(type, x, y);
     }
 
-    public int Execute(Hero hero, char land){
+    public int Execute(Hero hero, char terrain){
 
         float hp_limit = HP_LIMIT + this.getLevel()*LEVEL_MULTIPIER;
         if(hp_limit > 1.4f){
@@ -48,12 +48,12 @@ public class Knight extends Hero {
             final_damage = starting_damage * IFPYRO_EXEC;
         }
 
-        if(land == 'L'){
-            final_damage = final_damage * LAND_BONUS;
+        if(terrain == 'L'){
+            final_damage = final_damage * TERRAIN_BONUS;
         }
         return Math.round(final_damage);
     }
-    public int Slam(Hero hero, char land){
+    public int Slam(Hero hero, char terrain){
         float starting_damage;
         starting_damage = SLAM_BASEDAMAGE + this.getLevel()*SLAM_DMGPERLEVEL;
         float final_damage = 0;
@@ -69,15 +69,15 @@ public class Knight extends Hero {
         if(hero.getType() == 'P'){
             final_damage = starting_damage * IFPYRO_SLAM;
         }
-        if(land == 'L'){
-            final_damage = final_damage * LAND_BONUS;
+        if(terrain == 'L'){
+            final_damage = final_damage * TERRAIN_BONUS;
         }
         return Math.round(final_damage);
     }
 
-    public void attack(Wizard wizard, char land){
+    public void attack(Wizard wizard, char terrain){
         int damage = 0;
-        damage = Execute(wizard, land) + Slam(wizard, land);
+        damage = Execute(wizard, terrain) + Slam(wizard, terrain);
         if(damage >= wizard.getCurrentHP()){
             wizard.setDead(true);
             return;
@@ -87,9 +87,9 @@ public class Knight extends Hero {
         }
         wizard.setIsSlammed(1);
     }
-    public void attack(Rogue rogue, char land){
+    public void attack(Rogue rogue, char terrain){
         int damage = 0;
-        damage = Execute(rogue, land) + Slam(rogue, land);
+        damage = Execute(rogue, terrain) + Slam(rogue, terrain);
         if(damage >= rogue.getCurrentHP()){
             rogue.setDead(true);
             return;
@@ -99,9 +99,9 @@ public class Knight extends Hero {
         }
         rogue.setIsSlammed(1);
     }
-    public void attack(Knight knight, char land){
+    public void attack(Knight knight, char terrain){
         int damage = 0;
-        damage = Execute(knight, land) + Slam(knight, land);
+        damage = Execute(knight, terrain) + Slam(knight, terrain);
         if(damage >= knight.getCurrentHP()){
             knight.setDead(true);
             return;
@@ -111,9 +111,9 @@ public class Knight extends Hero {
         }
         knight.setIsSlammed(1);
     }
-    public void attack(Pyromancer pyromancer, char land){
+    public void attack(Pyromancer pyromancer, char terrain){
         int damage = 0;
-        damage = Execute(pyromancer, land) + Slam(pyromancer, land);
+        damage = Execute(pyromancer, terrain) + Slam(pyromancer, terrain);
         if(damage >= pyromancer.getCurrentHP()){
             pyromancer.setDead(true);
             return;
@@ -123,8 +123,14 @@ public class Knight extends Hero {
         }
         pyromancer.setIsSlammed(1);
     }
-    public int BaseDamageCalculator(){
-        float baseDamage = EXECUTE_BASEDAMAGE + EXECUTE_DMGPERLVL * this.getLevel();
+    public int BaseDamageCalculator(char terrain){
+        float baseDamage1 = EXECUTE_BASEDAMAGE + EXECUTE_DMGPERLVL * this.getLevel();
+        float baseDamage2 = SLAM_BASEDAMAGE + SLAM_DMGPERLEVEL * this.getLevel();
+        float total_damage = baseDamage1 + baseDamage2;
+        if(terrain == 'L'){
+            total_damage = total_damage + TERRAIN_BONUS;
+        }
+        return Math.round(baseDamage1 + baseDamage2);
     }
 
 

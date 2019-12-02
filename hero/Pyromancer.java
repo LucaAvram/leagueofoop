@@ -75,9 +75,10 @@ public class Pyromancer extends Hero {
         else{
             wizard.setCurrentHP(wizard.getCurrentHP() - damage);
         }
+        int igniteDamage = Math.round((IGNITE_OVERTIME + IGNITE_DMGPERLEVEL * this.getLevel()) * IFWIZARD_IGN);
         int[] igniteSet = new int[3];
         igniteSet[0] = 1;
-        igniteSet[1] = Math.round(IGNITE_OVERTIME + IGNITE_OVRPERLVL * this.getLevel());
+        igniteSet[1] = igniteDamage;
         igniteSet[2] = IGNITE_ROUNDS;
         wizard.setIsIgnited(igniteSet);
     }
@@ -90,9 +91,11 @@ public class Pyromancer extends Hero {
         else{
             rogue.setCurrentHP(rogue.getCurrentHP() - damage);
         }
+        int igniteDamage = Math.round((IGNITE_OVERTIME + IGNITE_DMGPERLEVEL * this.getLevel()) * IFROGUE_IGN);
+
         int[] igniteSet = new int[3];
         igniteSet[0] = 1;
-        igniteSet[1] = Math.round(IGNITE_OVERTIME + IGNITE_OVRPERLVL * this.getLevel());
+        igniteSet[1] = igniteDamage;
         igniteSet[2] = IGNITE_ROUNDS;
         rogue.setIsIgnited(igniteSet);
     }
@@ -105,9 +108,10 @@ public class Pyromancer extends Hero {
         else{
             knight.setCurrentHP(knight.getCurrentHP() - damage);
         }
+        int igniteDamage = Math.round((IGNITE_OVERTIME + IGNITE_DMGPERLEVEL * this.getLevel()) * IFKNIGHT_IGN);
         int[] igniteSet = new int[3];
         igniteSet[0] = 1;
-        igniteSet[1] = Math.round(IGNITE_OVERTIME + IGNITE_OVRPERLVL * this.getLevel());
+        igniteSet[1] = igniteDamage;
         igniteSet[2] = IGNITE_ROUNDS;
         knight.setIsIgnited(igniteSet);
     }
@@ -120,9 +124,10 @@ public class Pyromancer extends Hero {
         else{
             pyromancer.setCurrentHP(pyromancer.getCurrentHP() - damage);
         }
+        int igniteDamage = Math.round((IGNITE_OVERTIME + IGNITE_DMGPERLEVEL * this.getLevel()) * IFPYRO_IGN);
         int[] igniteSet = new int[3];
         igniteSet[0] = 1;
-        igniteSet[1] = Math.round(IGNITE_OVERTIME + IGNITE_OVRPERLVL * this.getLevel());
+        igniteSet[1] = igniteDamage;
         igniteSet[2] = IGNITE_ROUNDS;
         pyromancer.setIsIgnited(igniteSet);
     }

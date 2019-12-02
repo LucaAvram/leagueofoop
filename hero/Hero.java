@@ -11,7 +11,7 @@ public abstract class Hero {
     private int currentXP;
     private int currentHP;
     private int MaxHP;
-    private int[] isParalysed; // 0 - yes/no, 1- time left
+    private int[] isParalysed; // 0 - yes/no, 1 - damage , 2- time left
     private int isSlammed ; // 0 - yes/no
     private int[] isIgnited ;  // 0 - yes/no , 1 - damage, 2 - time left
     private boolean isDead;
@@ -26,7 +26,7 @@ public abstract class Hero {
         currentXP=0;
         MaxHP = info.getHeroHP(type);
         currentHP = MaxHP;
-        isParalysed = new int[2];
+        isParalysed = new int[3];
         isSlammed = 0;
         isIgnited = new int[3];
         isDead= false;
